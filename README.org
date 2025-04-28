@@ -9,9 +9,23 @@ Did I tell y'all it's memory safe guys?
 
 It uses the template.html in the template folder and the css file. 
 
-Just put your posts in the posts folder and use the command cargo run. and it'll do everything for you and spit out the output in the folder named output (shocking right?)
+Just put your posts in the posts folder and use the command cargo run. and it'll do everything for you and spit out the output in the folder named output (shocking right?). To view the site cd into the output folder and run a webserver there.You can start a web server by running ~python3 -m http.server 8000~. Or any other method you prefer.
 
 Also as one wise girl said, "No there is no slur in the name you are mistaken. However, hypothetically if there was a slur, I would be allowed to use that one. Please refer to the project by its full name."
+
+* Project Checklist
+- [X] basic theming
+- [X] home page with preview
+- [X] code syntax highlighting
+- [ ] different themes and colorschemes
+- [ ] different template support
+- [ ] embedded webserver for testing purposes
+- [ ] Proper documenation
+ 
+
+
+
+
 
 TLDR, :3
 
