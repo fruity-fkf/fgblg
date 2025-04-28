@@ -1,0 +1,16 @@
+* Fast Accessable Goated Golang-less Opinionated Template-driven Blog system.
+-----
+
+F.A.G.G.O.T is yet another Markdown based static site generator. Yet this is *better* because it uses *Rust* and is *memory safe* .
+
+[INSERT RANT ABOUT BLAZINGLY FAST RUST CRAP HERE].
+
+Did I tell y'all it's memory safe guys? 
+
+It uses the template.html in the template folder and the css file. 
+
+Just put your posts in the posts folder and use the command cargo run. and it'll do everything for you and spit out the output in the folder named output (shocking right?)
+
+Also as one wise girl said, "No there is no slur in the name you are mistaken. However, hypothetically if there was a slur, I would be allowed to use that one. Please refer to the project by its full name."
+
+TLDR, :3

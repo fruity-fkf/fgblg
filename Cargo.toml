@@ -1,0 +1,9 @@
+[package]
+name = "faggot"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+comrak = "0.20"
+toml = "0.8.21"
+
