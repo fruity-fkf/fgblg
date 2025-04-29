@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Blog</title>
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Syntax highlighting for code blocks -->
+    <link rel="stylesheet" href="//unpkg.com/@catppuccin/highlightjs@1.0.1/css/catppuccin-frappe.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/languages/rust.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="/home.html" class="nav-logo">My Blog</a>
+            <ul class="nav-links">
+                <li><a href="/home.html">Home</a></li>
+                <li><a href="/about/index.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main class="content">
+        <h1>Blog Posts</h1>
+        <div class="blog-posts">
+            <article class="blog-post">
+                <h2><a href="/posts/test.html">test</a></h2>
+                <p class="post-preview"> This document is designed to test all the major features of Markdown.  ---    ---   - *Italic* text - **Bold** text - ***Bold and Italic*** text - ~~Strikethrough~~ text  ---   - Item 1   - Sub-item ...</p>
+                <a href="/posts/test.html" class="read-more">Read more →</a>
+            </article>
+        </div>
+    </main>
+    <button id="backToTop" style="display:none; position:fixed; bottom:20px; right:20px; background: none; border: none; font-size: 24px; color: white;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <footer>
+        <p>&copy; 2025 My Blog. All rights reserved.</p>
+    </footer>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

@@ -6,4 +6,6 @@ edition = "2021"
 [dependencies]
 comrak = "0.20"
 toml = "0.8.21"
-
+axum = "0.7"
+tokio = { version = "1", features = ["full"] }
+tower-http = { version = "0.5", features = ["fs"] }
