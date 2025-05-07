@@ -1,4 +1,4 @@
-use comrak::{markdown_to_html, ComrakOptions};
+use markdown;
 use std::{
     fs,
     io::{self, Write},
@@ -51,7 +51,7 @@ fn process_markdown_file(file_path: &str, template: &str) -> io::Result<(String,
         )
     })?;
     let preview = extract_preview(&file, 200);
-    let html_body = markdown_to_html(&file, &ComrakOptions::default());
+    let html_body = markdown::to_html(&file);
     let full_html = template.replace("{body}", &html_body);
     Ok((full_html, preview))
 }
