@@ -21,7 +21,7 @@ Also as one wise girl said, "No there is no slur in the name you are mistaken. H
 - [ ] different template support
 - [ ] embedded webserver for testing purposes
 - [ ] Proper documenation
- 
+- [ ] Custom Markdown parser library
 
 
 
