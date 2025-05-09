@@ -1,4 +1,4 @@
-use markdown;
+use comrak::{ComrakOptions, markdown_to_html};
 use std::{
     fs,
     io::{self, Write},
@@ -38,11 +38,7 @@ fn extract_preview(content: &str, max_length: usize) -> String {
     }
 }
 
-// instead of doing it for each segment I'm finally moving to just making a function for it
-// It essentially takes a template html file and just converts the markdown to html and then pastes
-// it inside the template by replaing the {body} thing
-//
-//
+// Function that uses comrak to convert markdown to HTML
 fn process_markdown_file(file_path: &str, template: &str) -> io::Result<(String, String)> {
     let file = fs::read_to_string(file_path).map_err(|e| {
         io::Error::new(
@@ -50,9 +46,22 @@ fn process_markdown_file(file_path: &str, template: &str) -> io::Result<(String,
             format!("Failed to read markdown file: {}", e),
         )
     })?;
+
     let preview = extract_preview(&file, 200);
-    let html_body = markdown::to_html(&file);
+
+    //adding extensions to comrak for stuff
+    let mut options = ComrakOptions::default();
+    options.extension.table = true;
+    options.extension.strikethrough = true;
+    options.extension.autolink = true;
+    options.extension.tasklist = true;
+    options.extension.footnotes = true;
+    options.parse.smart = true;
+    options.render.unsafe_ = true; // needed for raw HTML 
+
+    let html_body = markdown_to_html(&file, &options);
     let full_html = template.replace("{body}", &html_body);
+
     Ok((full_html, preview))
 }
 
@@ -90,12 +99,7 @@ fn generate_home_page(posts: &[(String, String, String)]) -> io::Result<String> 
     Ok(home_html)
 }
 
-//adding sections to the main func so I can grep there easily
-//
-
-//note to self: Macro from tokio...IDK what it does so learn it later
 #[tokio::main]
-
 async fn main() -> io::Result<()> {
     //making the folder/file tree and copying shit there
     make_folders()?;
@@ -155,8 +159,6 @@ async fn main() -> io::Result<()> {
             }
         }
     }
-
-    //Generate the home page
     let home_html = generate_home_page(&posts)?;
     let mut home_file = fs::File::create("output/index.html").map_err(|e| {
         io::Error::new(

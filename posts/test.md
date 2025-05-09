@@ -41,6 +41,14 @@ This document is designed to test all the major features of Markdown.
 
 ---
 
+## Task Lists
+
+- [x] Write test document
+- [ ] Add more features
+- [ ] Final review
+
+---
+
 ## Links
 
 [Visit Rust's official website](https://www.rust-lang.org)
@@ -69,7 +77,47 @@ Here is some `inline code`.
 fn main() {
     println!("Hello, world!");
 }
+```
 
+---
 
+## Tables
 
+| Syntax     | Description |
+|------------|-------------|
+| Header     | Title       |
+| Paragraph  | Text        |
 
+---
+
+## Horizontal Rule
+
+---
+
+## HTML in Markdown
+
+<div style="color: red;">This is raw HTML</div>
+
+---
+
+## Escaping Characters
+
+Use a backslash to escape characters: \*not italic\*
+
+---
+
+## Footnotes
+
+Here is a sentence with a footnote.[^1]
+
+[^1]: This is the footnote.
+
+---
+
+## Emoji
+
+- :rocket: Launch
+- :tada: Celebration
+- :warning: Warning
+
+---
