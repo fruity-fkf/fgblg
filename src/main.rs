@@ -64,7 +64,7 @@ fn process_markdown_file(file_path: &str, template: &str) -> io::Result<(String,
 
     Ok((full_html, preview))
 }
-
+//tge main function that actually generates the previews for the homepage
 fn generate_home_page(posts: &[(String, String, String)]) -> io::Result<String> {
     let mut posts_html = String::new();
 
