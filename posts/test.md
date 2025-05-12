@@ -1,5 +1,8 @@
 # Markdown Test Document
 
+[comment]: <> (This is a comment, it will not be included)
+[//]: <> (This is also a comment.)
+
 This document is designed to test all the major features of Markdown.
 
 ---

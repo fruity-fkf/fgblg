@@ -22,8 +22,8 @@ fn make_folders() -> io::Result<()> {
     Ok(())
 }
 
-//takes the first few lines from the markdown and converts it on the side and returns it so I can
-//preview it
+// takes the first few lines from the markdown and converts it on the side and returns it so I can
+// preview it
 fn extract_preview(content: &str, max_length: usize) -> String {
     let clean_content = content
         .lines()
@@ -49,7 +49,7 @@ fn process_markdown_file(file_path: &str, template: &str) -> io::Result<(String,
 
     let preview = extract_preview(&file, 200);
 
-    //adding extensions to comrak for stuff
+    // adding extensions to comrak for stuff
     let mut options = ComrakOptions::default();
     options.extension.table = true;
     options.extension.strikethrough = true;
@@ -64,7 +64,7 @@ fn process_markdown_file(file_path: &str, template: &str) -> io::Result<(String,
 
     Ok((full_html, preview))
 }
-//tge main function that actually generates the previews for the homepage
+// the main function that actually generates the previews for the homepage
 fn generate_home_page(posts: &[(String, String, String)]) -> io::Result<String> {
     let mut posts_html = String::new();
 
@@ -101,7 +101,7 @@ fn generate_home_page(posts: &[(String, String, String)]) -> io::Result<String> 
 
 #[tokio::main]
 async fn main() -> io::Result<()> {
-    //making the folder/file tree and copying shit there
+    // making the folder/file tree and copying shit there
     make_folders()?;
     if Path::new("templates/style.css").exists() {
         fs::copy("templates/style.css", "output/css/style.css").map_err(|e| {
@@ -109,7 +109,7 @@ async fn main() -> io::Result<()> {
         })?;
     }
 
-    //read the tenplate
+    // read the tenplate
     let template = fs::read_to_string("templates/template.html").map_err(|e| {
         io::Error::new(
             io::ErrorKind::Other,
@@ -117,7 +117,7 @@ async fn main() -> io::Result<()> {
         )
     })?;
 
-    //read posts
+    // read posts
     let mut posts = Vec::new();
     let posts_dir = Path::new("posts");
 
@@ -133,7 +133,7 @@ async fn main() -> io::Result<()> {
                     .to_string_lossy()
                     .to_string();
 
-                //generate the html of the same name
+                // generate the html of the same name
 
                 let (html, preview) = process_markdown_file(
                     path.to_str()
@@ -174,6 +174,7 @@ async fn main() -> io::Result<()> {
     })?;
 
     println!("Files have been generated! :3");
+    println!("fkf likes boys");
 
     server::serve_web("output", 3000).await?;
 
