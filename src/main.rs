@@ -22,8 +22,8 @@ fn make_folders() -> io::Result<()> {
     Ok(())
 }
 
-//takes the first few lines from the markdown and converts it on the side and returns it so I can
-//preview it
+// takes the first few lines from the markdown and converts it on the side and returns it so I can
+// preview it
 fn extract_preview(content: &str, max_length: usize) -> String {
     let clean_content = content
         .lines()
@@ -49,7 +49,7 @@ fn process_markdown_file(file_path: &str, template: &str) -> io::Result<(String,
 
     let preview = extract_preview(&file, 200);
 
-    //adding extensions to comrak for stuff
+    // adding extensions to comrak for stuff
     let mut options = ComrakOptions::default();
     options.extension.table = true;
     options.extension.strikethrough = true;
