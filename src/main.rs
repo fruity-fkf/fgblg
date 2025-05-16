@@ -1,9 +1,9 @@
-use comrak::{ComrakOptions, markdown_to_html};
 use std::{
     fs,
     io::{self, Write},
     path::Path,
 };
+mod markdown;
 mod server;
 
 fn make_folders() -> io::Result<()> {
@@ -22,48 +22,6 @@ fn make_folders() -> io::Result<()> {
     Ok(())
 }
 
-// takes the first few lines from the markdown and converts it on the side and returns it so I can
-// preview it
-fn extract_preview(content: &str, max_length: usize) -> String {
-    let clean_content = content
-        .lines()
-        .filter(|line| !line.starts_with('#'))
-        .collect::<Vec<&str>>()
-        .join(" ");
-    let preview = clean_content.chars().take(max_length).collect::<String>();
-    if clean_content.len() > max_length {
-        format!("{}...", preview)
-    } else {
-        preview
-    }
-}
-
-// Function that uses comrak to convert markdown to HTML
-fn process_markdown_file(file_path: &str, template: &str) -> io::Result<(String, String)> {
-    let file = fs::read_to_string(file_path).map_err(|e| {
-        io::Error::new(
-            io::ErrorKind::Other,
-            format!("Failed to read markdown file: {}", e),
-        )
-    })?;
-
-    let preview = extract_preview(&file, 200);
-
-    // adding extensions to comrak for stuff
-    let mut options = ComrakOptions::default();
-    options.extension.table = true;
-    options.extension.strikethrough = true;
-    options.extension.autolink = true;
-    options.extension.tasklist = true;
-    options.extension.footnotes = true;
-    options.parse.smart = true;
-    options.render.unsafe_ = true; // needed for raw HTML 
-
-    let html_body = markdown_to_html(&file, &options);
-    let full_html = template.replace("{body}", &html_body);
-
-    Ok((full_html, preview))
-}
 // the main function that actually generates the previews for the homepage
 fn generate_home_page(posts: &[(String, String, String)]) -> io::Result<String> {
     let mut posts_html = String::new();
@@ -135,7 +93,7 @@ async fn main() -> io::Result<()> {
 
                 // generate the html of the same name
 
-                let (html, preview) = process_markdown_file(
+                let (html, preview) = markdown::process_markdown_file(
                     path.to_str()
                         .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "Invalid file path"))?,
                     &template,
