@@ -5,6 +5,7 @@ use std::{
 };
 mod html;
 mod markdown;
+mod org;
 mod server;
 
 fn make_folders() -> io::Result<()> {
