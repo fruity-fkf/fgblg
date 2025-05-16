@@ -1,4 +1,4 @@
-use std::{fs, io, path::Path};
+use std::{fs, io, path::Path, process};
 
 mod files;
 mod html;
@@ -25,12 +25,24 @@ async fn main() -> io::Result<()> {
         )
     })?;
 
-    // read posts
+    //  vector for holding all of the posts.....
     let mut posts = Vec::new();
-    //makes the posts folder....should move it to files.rs later
-    let posts_dir = Path::new("posts");
+    // This following codeblock was a battleground for me learning to mess around with match
+    // statements
 
-    //read posts recursively
+    let posts_dir = Path::new("posts");
+    match posts_dir.exists() {
+        true => println!("Found the posts directory. Generating the blog......"),
+        false => {
+            eprintln!("FUCKING MORON. You forgot to make the posts folder");
+            process::exit(1);
+        }
+    }
+
+    //warzone ends here
+
+    //read posts recursively... (note: Change it to a better comment later because this just looks
+    //generic af )
     if posts_dir.exists() {
         for entry in fs::read_dir(posts_dir)? {
             let entry = entry?;
