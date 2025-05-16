@@ -3,6 +3,7 @@ use std::{
     io::{self, Write},
     path::Path,
 };
+mod html;
 mod markdown;
 mod server;
 
@@ -22,45 +23,11 @@ fn make_folders() -> io::Result<()> {
     Ok(())
 }
 
-// the main function that actually generates the previews for the homepage
-fn generate_home_page(posts: &[(String, String, String)]) -> io::Result<String> {
-    let mut posts_html = String::new();
-
-    for (title, path, preview) in posts {
-        posts_html.push_str(&format!(
-            r#"<article class="blog-post">
-                <h2><a href="/posts/{}.html">{}</a></h2>
-                <p class="post-preview">{}</p>
-                <a href="/posts/{}.html" class="read-more">Read more →</a>
-            </article>"#,
-            path, title, preview, path
-        ));
-    }
-
-    let template = fs::read_to_string("templates/template.html").map_err(|e| {
-        io::Error::new(
-            io::ErrorKind::Other,
-            format!("Failed to read template: {}", e),
-        )
-    })?;
-    let home_html = template.replace(
-        "{body}",
-        &format!(
-            r#"<h1>Blog Posts</h1>
-        <div class="blog-posts">
-            {}
-        </div>"#,
-            posts_html
-        ),
-    );
-
-    Ok(home_html)
-}
-
 #[tokio::main]
 async fn main() -> io::Result<()> {
     // making the folder/file tree and copying shit there
     make_folders()?;
+    //copy over the css
     if Path::new("templates/style.css").exists() {
         fs::copy("templates/style.css", "output/css/style.css").map_err(|e| {
             io::Error::new(io::ErrorKind::Other, format!("Failed to copy CSS: {}", e))
@@ -117,7 +84,7 @@ async fn main() -> io::Result<()> {
             }
         }
     }
-    let home_html = generate_home_page(&posts)?;
+    let home_html = html::generate_home_page(&posts)?;
     let mut home_file = fs::File::create("output/index.html").map_err(|e| {
         io::Error::new(
             io::ErrorKind::Other,
