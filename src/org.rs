@@ -1,5 +1,4 @@
 use crate::html;
-use orgize::export::DefaultHtmlHandler;
 use orgize::Org;
 use std::{fs, io};
 
