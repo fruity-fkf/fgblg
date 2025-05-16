@@ -2,6 +2,19 @@ use std::{
     fs,
     io::{self},
 };
+pub fn extract_preview(content: &str, max_length: usize) -> String {
+    let clean_content = content
+        .lines()
+        .filter(|line| !line.starts_with('#'))
+        .collect::<Vec<&str>>()
+        .join(" ");
+    let preview = clean_content.chars().take(max_length).collect::<String>();
+    if clean_content.len() > max_length {
+        format!("{}...", preview)
+    } else {
+        preview
+    }
+}
 pub fn generate_home_page(posts: &[(String, String, String)]) -> io::Result<String> {
     let mut posts_html = String::new();
 
