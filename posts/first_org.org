@@ -1,7 +1,7 @@
 * Org Mode Capabilities Test
 
 A file to demonstrate all useful Org mode syntax features.
-
+changed count:1
 ---
 
 * Headings

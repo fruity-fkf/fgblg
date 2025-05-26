@@ -14,13 +14,3 @@ pub fn make_folders() -> io::Result<()> {
     }
     Ok(())
 }
-
-pub fn detect_filetype(path: &Path) -> Option<&'static str> {
-    path.extension()
-        .and_then(|s| s.to_str())
-        .and_then(|ext| match ext {
-            "md" | "markdown" => Some("markdown"),
-            "org" => Some("org"),
-            _ => None,
-        })
-}

@@ -1,18 +1,31 @@
+use clap::Parser;
 use std::{fs, io, path::Path, process};
-
 mod files;
 mod html;
 mod markdown;
-mod org;
+//TODO: fix org mode later
+// mod org;
 mod server;
+
+//command line parser
+
+#[derive(Parser)]
+struct Args {
+    #[arg(short, long)]
+    theme: String,
+}
 
 #[tokio::main]
 async fn main() -> io::Result<()> {
+    let args = Args::parse();
+    let css_file = format!("templates/style-{}.css", args.theme);
+    println!("{}", css_file);
+
     // making the folder/file tree and copying shit there
     files::make_folders()?;
     //copy over the css
-    if Path::new("templates/style.css").exists() {
-        fs::copy("templates/style.css", "output/css/style.css").map_err(|e| {
+    if Path::new(&css_file).exists() {
+        fs::copy(css_file, "output/css/style.css").map_err(|e| {
             io::Error::new(io::ErrorKind::Other, format!("Failed to copy CSS: {}", e))
         })?;
     }
@@ -55,26 +68,46 @@ async fn main() -> io::Result<()> {
                 .to_string();
 
             /*
-            useing match here to check if the file ends with .md or .org and then just
-            converting them with whichever function is appropriate
+                       useing match here to check if the file ends with .md or .org and then just
+                       converting them with whichever function is appropriate
+
+
             */
+
+            // temporarily disabling this for a much simpler markdown only system for now since org mode is broken
+            //
+
+            // let (html, preview) = match path.extension().and_then(|s| s.to_str()) {
+            //     Some("md") => markdown::process_markdown_file(
+            //         path.to_str()
+            //             .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "Invalid file path"))?,
+            //         &template,
+            //     )?,
+            //     Some("org") => match org::process_org_file(
+            //         path.to_str()
+            //             .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "Invalid file path"))?,
+            //         &template,
+            //     ) {
+            //         Ok(result) => result,
+            //         Err(e) => {
+            //             eprintln!("Error processing org file {}: {}", path.display(), e);
+            //             continue;
+            //         }
+            //     },
+            //     _ => continue,
+            // };
             let (html, preview) = match path.extension().and_then(|s| s.to_str()) {
                 Some("md") => markdown::process_markdown_file(
-                    path.to_str()
-                        .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "Invalid file path"))?,
+                    path.to_str().ok_or_else(|| {
+                        io::Error::new(
+                            io::ErrorKind::Other,
+                            "File path invalid error. Shouldn't even be happening. WTF Went wrong?",
+                        )
+                    })?,
                     &template,
-                )?,
-                Some("org") => match org::process_org_file(
-                    path.to_str()
-                        .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "Invalid file path"))?,
-                    &template,
-                ) {
-                    Ok(result) => result,
-                    Err(e) => {
-                        eprintln!("Error processing org file {}: {}", path.display(), e);
-                        continue;
-                    }
-                },
+                )?, //used ? here because I am a lazy fucker :3
+
+                //I love the throway thingy in rust
                 _ => continue,
             };
 
