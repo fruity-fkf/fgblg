@@ -17,11 +17,12 @@ Also as one wise girl said, "No there is no slur in the name you are mistaken. H
 - [X] basic theming
 - [X] home page with preview
 - [X] code syntax highlighting
-- [ ] different themes and colorschemes
+- [X] different themes and colorschemes
 - [ ] different template support
 - [ ] embedded webserver for testing purposes
 - [ ] Proper documenation
 - [ ] Custom Markdown parser library
+- [ ] A proper TUI interface 
 
 
 
