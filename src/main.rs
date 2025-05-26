@@ -64,11 +64,17 @@ async fn main() -> io::Result<()> {
                         .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "Invalid file path"))?,
                     &template,
                 )?,
-                Some("org") => org::process_org_file(
+                Some("org") => match org::process_org_file(
                     path.to_str()
                         .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "Invalid file path"))?,
                     &template,
-                )?,
+                ) {
+                    Ok(result) => result,
+                    Err(e) => {
+                        eprintln!("Error processing org file {}: {}", path.display(), e);
+                        continue;
+                    }
+                },
                 _ => continue,
             };
 

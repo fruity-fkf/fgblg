@@ -82,7 +82,7 @@ def greet(name):
 
 ## Links
 
-[OpenAI](https://openai.com)
+[Rust](https://rust-lang.org)
 
 <https://github.com>
 

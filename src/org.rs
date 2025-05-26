@@ -19,10 +19,8 @@ pub fn process_org_file(file_path: &str, template: &str) -> io::Result<(String, 
 
     let preview = html::extract_preview(&file, 200);
 
-    let org = Org::parse(&file);
-    let mut html_body = Vec::new();
-    org.write_html(&mut html_body).unwrap();
-    let html_body = String::from_utf8(html_body).unwrap();
+    // Parse the org file and convert to HTML
+    let html_body = Org::parse(&file).to
 
     let full_html = template.replace("{body}", &html_body);
 

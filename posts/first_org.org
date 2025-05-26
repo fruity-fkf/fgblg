@@ -1,0 +1,158 @@
+* Org Mode Capabilities Test
+
+A file to demonstrate all useful Org mode syntax features.
+
+---
+
+* Headings
+
+* H1 Heading
+** H2 Heading
+*** H3 Heading
+**** H4 Heading
+***** H5 Heading
+****** H6 Heading
+
+---
+
+* Emphasis
+
+/Italic text with slashes/
+
+*Bold text with asterisks*
+
+_=Underline with underscores=_
+
++Strikethrough+
+
+~Verbatim or code-like text~
+
+---
+
+* Lists
+
+** Unordered List
+- Item 1
+- Item 2
+  - Subitem
+    - Deeper subitem
+
+---
+* Code
+
+** Inline Code
+
+Use ~printf()~ to print text.
+
+** Source Block
+
+#+BEGIN_SRC rust
+fn main() {
+    println!("Hello, world!");
+}
+#+END_SRC
+
+** Python Example
+
+#+BEGIN_SRC python
+def greet(name):
+    print(f"Hello, {name}!")
+#+END_SRC
+
+---
+
+* Blockquotes
+
+#+BEGIN_QUOTE
+This is a blockquote.
+
+  #+BEGIN_QUOTE
+  Nested blockquote.
+  #+END_QUOTE
+#+END_QUOTE
+
+---
+
+* Links
+
+[[https://openai.com][OpenAI]]
+
+[[https://github.com]]
+
+---
+
+* Images
+
+[[https://www.rust-lang.org/static/images/rust-logo-blk.svg]]
+
+---
+
+* Tables
+
+| Feature  | Supported | Notes                   |
+|----------+-----------+-------------------------|
+| Tables   | Yes       | Native Org support      |
+| Emojis   | Yes       | Needs rendering support |
+| Code     | Yes       | With #+BEGIN_SRC        |
+
+---
+
+* Horizontal Rule
+
+-----
+
+---
+
+* Checkboxes / Task List
+
+- [X] Item 1
+- [ ] Item 2
+- [ ] Item 3
+
+---
+
+* Emoji
+
+👍 🎉 🚀 🤖
+
+---
+
+* HTML Export Example (with raw HTML)
+
+#+BEGIN_EXPORT html
+<div style="color:red; font-weight: bold;">
+This text is styled with raw HTML.
+</div>
+#+END_EXPORT
+
+---
+
+* Footnotes
+
+Here is a footnote reference[fn:1].
+
+[fn:1] This is the footnote definition.
+
+---
+
+* Definition List
+
+Term 1 ::
+  Definition of term 1
+
+Term 2 ::
+  Definition of term 2
+
+---
+
+* Math
+
+** Inline: $E = mc^2$
+
+** Block:
+
+#+BEGIN_EXPORT latex
+\[
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+\]
+#+END_EXPORT
