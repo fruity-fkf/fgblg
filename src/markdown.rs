@@ -20,7 +20,10 @@ pub fn process_markdown_file(file_path: &str, template: &str) -> io::Result<(Str
     options.extension.tasklist = true;
     options.extension.footnotes = true;
     options.parse.smart = true;
-    options.render.unsafe_ = true; // needed for raw HTML 
+    options.render.unsafe_ = true; // needed for raw HTML(not sure....got it from the docs) 
+    options.extension.header_ids = Some("".to_string());
+
+    
 
     let html_body = markdown_to_html(&file, &options);
     let full_html = template.replace("{body}", &html_body);
