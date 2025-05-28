@@ -20,8 +20,8 @@ struct Args {
     theme: String,
     #[arg(long)]
     template: String,
-    #[arg(long)]
-    code_theme: Option<String>,
+    #[arg(long, value_name = "THEME", help = "Highlight.js theme name (e.g., github-dark, rose-pine)")]
+    code_theme: String,
 }
 
 #[tokio::main]
@@ -48,18 +48,14 @@ async fn main() -> io::Result<()> {
         )
     })?;
 
-    // Add highlight.js theme if specified
-    if let Some(code_theme) = args.code_theme {
-        let theme_link = format!(
-            r#"<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/{}.min.css">"#,
-            code_theme
-        );
-        template = template.replace("{highlight_theme}", &theme_link);
-    } else {
-        // Default to github-dark if no theme specified
-        let default_theme = r#"<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">"#;
-        template = template.replace("{highlight_theme}", default_theme);
-    }
+    // Add highlight.js theme
+    let theme_name = args.code_theme.to_lowercase().replace(" ", "-");
+    let theme_link = format!(
+        r#"<link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/{}.min.css">"#,
+        theme_name
+    );
+    println!("Using highlight.js theme: {}", theme_name);
+    template = template.replace("{highlight_theme}", &theme_link);
 
     //  vector for holding all of the posts.....
     let mut posts = Vec::new();
