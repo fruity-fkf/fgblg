@@ -67,29 +67,6 @@ ul, ol {
   padding-left: 2.5rem;
 }
 
-/* Inline code */
-code {
-  background-color: #21252b; /* darker */
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
-  font-family: 'JetBrains Mono', monospace;
-  color: #e06c75; /* red */
-  font-size: 0.9em;
-}
-
-/* Code blocks */
-pre {
-  background: #21252b; /* darker */
-  color: #abb2bf; /* text */
-  padding: 1.25em;
-  overflow-x: auto;
-  border-radius: 8px;
-  margin: 1.75rem 0;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.95em;
-  line-height: 1.5;
-}
-
 /* Blockquotes */
 blockquote {
   margin: 1.5rem 0;

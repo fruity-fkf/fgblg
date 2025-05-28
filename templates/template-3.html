@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Blog</title>
     <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Syntax highlighting for code blocks -->
+    {highlight_theme}
     <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
     <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/languages/rust.min.js"></script>
     <script>hljs.highlightAll();</script>
@@ -54,15 +57,14 @@
         .content {
             grid-area: main;
             padding: 2rem;
-            max-width: 1000px;
+            max-width: 800px;
             margin: 0 auto;
         }
         footer {
             grid-area: footer;
+            text-align: center;
+            padding: 2rem;
             border-top: 1px solid var(--border);
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
-            margin-right: calc(-50vw + 50%);
         }
         .sidebar-menu {
             list-style: none;
@@ -102,21 +104,28 @@
             <a href="/" class="nav-logo">My Blog</a>
             <ul class="nav-links">
                 <li><a href="/home.html">Home</a></li>
-                <li><a href="/about/index.html">About</a></li>
+                <li><a href="/about.html">About</a></li>
             </ul>
         </div>
     </nav>
-    <aside class="sidebar">
-        <ul class="sidebar-menu">
-            <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="/about"><i class="fas fa-user"></i> About</a></li>
-            <li><a href="/archive"><i class="fas fa-archive"></i> Archive</a></li>
-        </ul>
-    </aside>
     <main class="content">
         {body}
     </main>
-    <button id="backToTop" style="display:none; position:fixed; bottom:20px; right:20px;">
+    <aside class="sidebar">
+        <h3>Recent Posts</h3>
+        <ul>
+            <li><a href="#">Post 1</a></li>
+            <li><a href="#">Post 2</a></li>
+            <li><a href="#">Post 3</a></li>
+        </ul>
+        <h3>Categories</h3>
+        <ul>
+            <li><a href="#">Category 1</a></li>
+            <li><a href="#">Category 2</a></li>
+            <li><a href="#">Category 3</a></li>
+        </ul>
+    </aside>
+    <button id="backToTop" style="display:none; position:fixed; bottom:20px; right:20px; background: none; border: none; font-size: 24px; color: white;">
         <i class="fas fa-arrow-up"></i>
     </button>
     <footer>

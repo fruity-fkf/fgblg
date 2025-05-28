@@ -2,7 +2,7 @@
 
 /* Full-screen dark background */
 html, body {
-  background-color: #0a0e14; /* background */
+  background-color: #0a0e14; /* bg */
   color: #b3b1ad; /* text */
   height: 100%;
   margin: 0;
@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 2.5rem;
   margin-bottom: 1.5rem;
   line-height: 1.2;
-  color: #e6b450; /* yellow */
+  color: #b3b1ad; /* text */
   font-weight: 600;
 }
 
@@ -57,7 +57,7 @@ a {
   transition: color 0.2s ease;
 }
 a:hover {
-  color: #d4bfff; /* purple */
+  color: #ffb454; /* orange */
   text-decoration: none;
 }
 
@@ -67,208 +67,153 @@ ul, ol {
   padding-left: 2.5rem;
 }
 
-/* Inline code */
-code {
-  background-color: #1a1f2c; /* surface */
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
-  font-family: 'JetBrains Mono', monospace;
-  color: #f07178; /* red */
-  font-size: 0.9em;
-}
-
-/* Code blocks */
-pre {
-  background: #1a1f2c; /* surface */
-  color: #b3b1ad; /* text */
-  padding: 1.25em;
-  overflow-x: auto;
-  border-radius: 8px;
-  margin: 1.75rem 0;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.95em;
-  line-height: 1.5;
-}
-
 /* Blockquotes */
 blockquote {
   margin: 1.5rem 0;
   padding: 1rem 1.5rem;
   border-left: 4px solid #5ccfe6; /* cyan */
   background: #0a0e14;
-  color: #c2d94c; /* green */
+  color: #626a73; /* muted */
   border-radius: 0 8px 8px 0;
 }
 
 /* Horizontal rule */
 hr {
   border: none;
-  border-top: 1px solid #4d5566; /* comment */
+  border-top: 1px solid #1f2430; /* surface */
   margin: 2.5rem 0;
 }
 
 /* Images */
 img {
   max-width: 100%;
-  border-radius: 12px;
-  display: block;
-  margin: 1.5rem 0;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: auto;
+  border-radius: 8px;
+  margin: 2rem 0;
 }
 
 /* Tables */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.75rem 0;
+  margin: 2rem 0;
+  background: #0a0e14; /* bg */
   border-radius: 8px;
   overflow: hidden;
 }
+
 th, td {
-  padding: 0.875rem;
-  border: 1px solid #4d5566;
-}
-th {
-  background-color: #1a1f2c;
-  color: #d4bfff; /* purple */
-  font-weight: 600;
-}
-td {
-  background-color: #0a0e14;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #1f2430; /* surface */
 }
 
-/* Navigation styles */
+th {
+  background: #1f2430; /* surface */
+  font-weight: 600;
+  color: #b3b1ad; /* text */
+}
+
+tr:hover {
+  background: #1f2430; /* surface */
+}
+
+/* Navigation */
 .top-nav {
-    background-color: rgba(10, 14, 20, 0.95); /* background with transparency */
-    padding: 1.25rem 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    position: sticky;
-    top: 0;
-    backdrop-filter: blur(8px);
-    z-index: 1000;
+  background: #0a0e14; /* bg */
+  padding: 1.25rem 0;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid #1f2430; /* surface */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  background-color: rgba(10, 14, 20, 0.95);
 }
 
 .nav-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-logo {
-    color: #e6b450; /* yellow */
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    transition: color 0.2s ease;
-}
-
-.nav-logo:hover {
-    color: #5ccfe6; /* cyan */
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #b3b1ad; /* text */
+  text-decoration: none;
 }
 
 .nav-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 2.5rem;
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
-    color: #b3b1ad;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    padding: 0.5rem 0;
-    position: relative;
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #5ccfe6;
-    transition: width 0.2s ease;
+  color: #b3b1ad; /* text */
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
-    color: #5ccfe6;
+  color: #5ccfe6; /* cyan */
 }
 
-.nav-links a:hover::after {
-    width: 100%;
+/* Footer */
+footer {
+  margin-top: 4rem;
+  padding: 2rem 0;
+  text-align: center;
+  color: #626a73; /* muted */
+  border-top: 1px solid #1f2430; /* surface */
 }
 
-/* Content styles */
-.content {
-    max-width: 800px;
-    margin: 2.5rem auto;
-    padding: 0 1.5rem;
-}
-
-/* Blog post preview styles */
+/* Blog post list */
 .blog-posts {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  display: grid;
+  gap: 2rem;
+  margin: 3rem 0;
 }
 
 .blog-post {
-    background: #1a1f2c; /* surface */
-    padding: 1.5rem;
-    border-radius: 12px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #1f2430; /* surface */
+  padding: 1.5rem;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .blog-post:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .blog-post h2 {
-    margin-top: 0;
-    margin-bottom: 1rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 .post-preview {
-    color: #c2d94c; /* green */
-    margin: 1rem 0;
-    font-size: 1rem;
-    line-height: 1.6;
+  color: #626a73; /* muted */
+  margin: 1rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .read-more {
-    display: inline-block;
-    margin-top: 1rem;
-    color: #5ccfe6;
-    font-weight: 500;
-    transition: color 0.2s ease;
+  display: inline-block;
+  margin-top: 1rem;
+  color: #5ccfe6; /* cyan */
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .read-more:hover {
-    color: #d4bfff;
-}
-
-/* Syntax highlighting */
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-built_in {
-    color: #d4bfff; /* purple */
-}
-
-.hljs-string,
-.hljs-doctag {
-    color: #c2d94c; /* green */
-}
-
-.hljs-comment {
-    color: #4d5566; /* comment */
+  color: #ffb454; /* orange */
 } 

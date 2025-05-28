@@ -20,6 +20,8 @@ struct Args {
     theme: String,
     #[arg(long)]
     template: String,
+    #[arg(long)]
+    code_theme: Option<String>,
 }
 
 #[tokio::main]
@@ -38,13 +40,26 @@ async fn main() -> io::Result<()> {
         })?;
     }
 
-    // read the tenplate
-    let template = fs::read_to_string(&html_file).map_err(|e| {
+    // read the template
+    let mut template = fs::read_to_string(&html_file).map_err(|e| {
         io::Error::new(
             io::ErrorKind::Other,
             format!("Failed to read template: {}", e),
         )
     })?;
+
+    // Add highlight.js theme if specified
+    if let Some(code_theme) = args.code_theme {
+        let theme_link = format!(
+            r#"<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/{}.min.css">"#,
+            code_theme
+        );
+        template = template.replace("{highlight_theme}", &theme_link);
+    } else {
+        // Default to github-dark if no theme specified
+        let default_theme = r#"<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">"#;
+        template = template.replace("{highlight_theme}", default_theme);
+    }
 
     //  vector for holding all of the posts.....
     let mut posts = Vec::new();
@@ -75,35 +90,6 @@ async fn main() -> io::Result<()> {
                 .to_string_lossy()
                 .to_string();
 
-            /*
-                       useing match here to check if the file ends with .md or .org and then just
-                       converting them with whichever function is appropriate
-
-
-            */
-
-            // temporarily disabling this for a much simpler markdown only system for now since org mode is broken
-            //
-
-            // let (html, preview) = match path.extension().and_then(|s| s.to_str()) {
-            //     Some("md") => markdown::process_markdown_file(
-            //         path.to_str()
-            //             .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "Invalid file path"))?,
-            //         &template,
-            //     )?,
-            //     Some("org") => match org::process_org_file(
-            //         path.to_str()
-            //             .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "Invalid file path"))?,
-            //         &template,
-            //     ) {
-            //         Ok(result) => result,
-            //         Err(e) => {
-            //             eprintln!("Error processing org file {}: {}", path.display(), e);
-            //             continue;
-            //         }
-            //     },
-            //     _ => continue,
-            // };
             let (html, preview) = match path.extension().and_then(|s| s.to_str()) {
                 Some("md") => markdown::process_markdown_file(
                     path.to_str().ok_or_else(|| {
@@ -113,9 +99,7 @@ async fn main() -> io::Result<()> {
                         )
                     })?,
                     &template,
-                )?, //used ? here because I am a lazy fucker :3
-
-                //I love the throway thingy in rust
+                )?,
                 _ => continue,
             };
 

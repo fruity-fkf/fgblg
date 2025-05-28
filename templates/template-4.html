@@ -6,11 +6,66 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Blog</title>
     <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Syntax highlighting for code blocks -->
+    {highlight_theme}
     <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
     <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/languages/rust.min.js"></script>
     <script>hljs.highlightAll();</script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+        body {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            grid-template-areas: "nav nav" "sidebar main" "footer footer";
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .top-nav {
+            grid-area: nav;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            background-color: rgba(28, 30, 38, 0.95);
+            padding: 1.25rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sidebar {
+            grid-area: sidebar;
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-right: 1px solid var(--border);
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+            margin-left: 0;
+        }
+        .content {
+            grid-area: main;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        footer {
+            grid-area: footer;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+        }
         .hero {
             background: var(--bg-secondary);
             padding: 4rem 2rem;
@@ -40,11 +95,6 @@
             padding-bottom: 0.5rem;
             margin-bottom: 2rem;
         }
-        .content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
     </style>
 </head>
 <body>
@@ -53,10 +103,24 @@
             <a href="/" class="nav-logo">My Blog</a>
             <ul class="nav-links">
                 <li><a href="/home.html">Home</a></li>
-                <li><a href="/about/index.html">About</a></li>
+                <li><a href="/about.html">About</a></li>
             </ul>
         </div>
     </nav>
+    <aside class="sidebar">
+        <h3>Recent Posts</h3>
+        <ul>
+            <li><a href="#">Post 1</a></li>
+            <li><a href="#">Post 2</a></li>
+            <li><a href="#">Post 3</a></li>
+        </ul>
+        <h3>Categories</h3>
+        <ul>
+            <li><a href="#">Category 1</a></li>
+            <li><a href="#">Category 2</a></li>
+            <li><a href="#">Category 3</a></li>
+        </ul>
+    </aside>
     <main class="content">
         <div class="hero">
             <h1>Welcome to My Blog</h1>
@@ -65,7 +129,7 @@
             {body}
         </div>
     </main>
-    <button id="backToTop" style="display:none; position:fixed; bottom:20px; right:20px;">
+    <button id="backToTop" style="display:none; position:fixed; bottom:20px; right:20px; background: none; border: none; font-size: 24px; color: white;">
         <i class="fas fa-arrow-up"></i>
     </button>
     <footer>
