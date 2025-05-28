@@ -1,4 +1,4 @@
-use clap::Parser;
+use clap::{Parser, command};
 use std::{fs, io, path::Path, process};
 mod files;
 mod html;
@@ -10,6 +10,11 @@ mod server;
 //command line parser
 
 #[derive(Parser)]
+#[command(
+    name = "Fgblg",                   // Binary name
+    about = "FKF's blogging tool. :3", // --help and --about section
+    version = "1.0.2",               // --version info
+)]
 struct Args {
     #[arg(short, long)]
     theme: String,
