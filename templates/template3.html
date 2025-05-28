@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Blog</title>
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Syntax highlighting for code blocks -->
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/languages/rust.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="text-center" style="padding: 2rem 0;">
+            <h1 style="margin-bottom: 1rem;">My Blog</h1>
+            <nav>
+                <ul style="list-style: none; display: flex; justify-content: center; gap: 2rem;">
+                    <li><a href="/home.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="/about/index.html"><i class="fas fa-user"></i> About</a></li>
+                    <li><a href="/archive.html"><i class="fas fa-archive"></i> Archive</a></li>
+                    <li><a href="/tags.html"><i class="fas fa-tags"></i> Tags</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main style="max-width: 800px; margin: 0 auto; padding: 2rem;">
+            {body}
+        </main>
+
+        <button class="back-to-top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <footer>
+            <p>&copy; 2025 FKF's faggot blog, no copyright exists :3</p>
+        </footer>
+    </div>
+
+    <script>
+        const backToTopButton = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html> 

@@ -15,7 +15,7 @@ pub fn extract_preview(content: &str, max_length: usize) -> String {
         preview
     }
 }
-pub fn generate_home_page(posts: &[(String, String, String)]) -> io::Result<String> {
+pub fn generate_home_page(posts: &[(String, String, String)],  html_file: &str) -> io::Result<String> {
     let mut posts_html = String::new();
 
     for (title, path, preview) in posts {
@@ -29,7 +29,7 @@ pub fn generate_home_page(posts: &[(String, String, String)]) -> io::Result<Stri
         ));
     }
 
-    let template = fs::read_to_string("templates/template.html").map_err(|e| {
+    let template = fs::read_to_string(html_file).map_err(|e| {
         io::Error::new(
             io::ErrorKind::Other,
             format!("Failed to read template: {}", e),

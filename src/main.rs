@@ -18,12 +18,15 @@ mod server;
 struct Args {
     #[arg(short, long)]
     theme: String,
+    #[arg(long)]
+    template: String,
 }
 
 #[tokio::main]
 async fn main() -> io::Result<()> {
     let args = Args::parse();
     let css_file = format!("templates/style-{}.css", args.theme);
+    let html_file = format!("templates/{}.html", args.template);
     println!("{}", css_file);
 
     // making the folder/file tree and copying shit there
@@ -36,7 +39,7 @@ async fn main() -> io::Result<()> {
     }
 
     // read the tenplate
-    let template = fs::read_to_string("templates/template.html").map_err(|e| {
+    let template = fs::read_to_string(&html_file).map_err(|e| {
         io::Error::new(
             io::ErrorKind::Other,
             format!("Failed to read template: {}", e),
@@ -129,7 +132,7 @@ async fn main() -> io::Result<()> {
         }
     }
 
-    let home_html = html::generate_home_page(&posts)?;
+    let home_html = html::generate_home_page(&posts, &html_file)?;
     fs::write("output/index.html", home_html.as_bytes()).map_err(|e| {
         io::Error::new(
             io::ErrorKind::Other,
