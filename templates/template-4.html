@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Blog</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/languages/rust.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .hero {
+            background: var(--bg-secondary);
+            padding: 4rem 2rem;
+            margin: -2.5rem -1.5rem 2.5rem;
+            border-bottom: 1px solid var(--border);
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .content-section {
+            margin: 3rem 0;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .content-section h2 {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">My Blog</a>
+            <ul class="nav-links">
+                <li><a href="/home.html">Home</a></li>
+                <li><a href="/about/index.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main class="content">
+        <div class="hero">
+            <h1>Welcome to My Blog</h1>
+        </div>
+        <div class="content-section">
+            {body}
+        </div>
+    </main>
+    <button id="backToTop" style="display:none; position:fixed; bottom:20px; right:20px;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <footer>
+        <p>&copy; 2025 FKF's faggot blog, no copyright exists :3 </p>
+    </footer>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html> 
