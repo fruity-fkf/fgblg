@@ -1,11 +1,12 @@
 use serde::Deserialize;
 use std::{fs, io};
 use toml::from_str;
-
+//NOTE: turns out you're supposed ot use snake_case for mod files. That's a bit silly IMO
 #[derive(Debug, Deserialize)]
 pub struct Config {
     pub theme: String,
     pub template: String,
+    pub home_template: String,
     pub code_theme: String,
 }
 

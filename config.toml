@@ -1,3 +1,4 @@
-theme = "gruvbox"
+theme = "catppuccin"
 template = "template-1"
-code_theme = "github"
+home_template = "home-template"
+code_theme = "https://unpkg.com/@catppuccin/highlightjs@1.0.1/css/catppuccin-mocha.css"

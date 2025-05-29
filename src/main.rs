@@ -26,7 +26,7 @@ async fn main() -> io::Result<()> {
     // Construct file paths from config
     let css_file = format!("templates/style-{}.css", config.theme);
     let html_file = format!("templates/{}.html", config.template);
-    let home_template = "templates/home-template.html";
+    let home_template = format!("templates/{}.html", config.home_template);
 
     // making the folder/file tree and copying shit there
     files::make_folders()?;
@@ -46,13 +46,7 @@ async fn main() -> io::Result<()> {
     })?;
 
     // Add highlight.js theme
-    let theme_name = config.code_theme.to_lowercase().replace(" ", "-");
-    let theme_link = format!(
-        r#"<link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/{}.min.css">"#,
-        theme_name
-    );
-    println!("Using highlight.js theme: {}", theme_name);
-    template = template.replace("{highlight_theme}", &theme_link);
+    template = template.replace("{highlight_theme}", &config.code_theme);
 
     //  vector for holding all of the posts.....
     let mut posts = Vec::new();
@@ -109,7 +103,7 @@ async fn main() -> io::Result<()> {
         }
     }
 
-    let home_html = html::generate_home_page(&posts, home_template)?;
+    let home_html = html::generate_home_page(&posts, &home_template)?;
     fs::write("output/index.html", home_html.as_bytes()).map_err(|e| {
         io::Error::new(
             io::ErrorKind::Other,
