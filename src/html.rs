@@ -15,7 +15,10 @@ pub fn extract_preview(content: &str, max_length: usize) -> String {
         preview
     }
 }
-pub fn generate_home_page(posts: &[(String, String, String)],  html_file: &str) -> io::Result<String> {
+pub fn generate_home_page(
+    posts: &[(String, String, String)],
+    html_file: &str,
+) -> io::Result<String> {
     let mut posts_html = String::new();
 
     for (title, path, preview) in posts {

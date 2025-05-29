@@ -10,7 +10,7 @@ mod toml_config;
 mod server;
 
 //command line parser
-
+//I raelly should add more useful command line arguments soon
 #[derive(Parser)]
 #[command(
     name = "Fgblg",                   // Binary name
@@ -21,7 +21,8 @@ struct Args {}
 
 #[tokio::main]
 async fn main() -> io::Result<()> {
-    let config: Config = toml_config::read_config("config.toml").expect("Failed to read config.toml");
+    let config: Config =
+        toml_config::read_config("config.toml").expect("Failed to read config.toml");
 
     // Construct file paths from config
     let css_file = format!("templates/style-{}.css", config.theme);
