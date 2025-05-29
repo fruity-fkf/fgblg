@@ -1,9 +1,10 @@
+use crate::toml_config::Config;
 use clap::{Parser, command};
 use std::{fs, io, path::Path, process};
 mod files;
 mod html;
 mod markdown;
-mod toml;
+mod toml_config;
 //TODO: fix org mode later
 // mod org;
 mod server;
@@ -20,11 +21,12 @@ struct Args {}
 
 #[tokio::main]
 async fn main() -> io::Result<()> {
-    let config: Config = read_config("config.toml").expect("Failed to read config.toml");
+    let config: Config = toml_config::read_config("config.toml").expect("Failed to read config.toml");
 
     // Construct file paths from config
     let css_file = format!("templates/style-{}.css", config.theme);
     let html_file = format!("templates/{}.html", config.template);
+    let home_template = "templates/home-template.html";
 
     // making the folder/file tree and copying shit there
     files::make_folders()?;
@@ -44,7 +46,7 @@ async fn main() -> io::Result<()> {
     })?;
 
     // Add highlight.js theme
-    let theme_name = args.code_theme.to_lowercase().replace(" ", "-");
+    let theme_name = config.code_theme.to_lowercase().replace(" ", "-");
     let theme_link = format!(
         r#"<link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/{}.min.css">"#,
         theme_name
@@ -107,7 +109,7 @@ async fn main() -> io::Result<()> {
         }
     }
 
-    let home_html = html::generate_home_page(&posts, &html_file)?;
+    let home_html = html::generate_home_page(&posts, home_template)?;
     fs::write("output/index.html", home_html.as_bytes()).map_err(|e| {
         io::Error::new(
             io::ErrorKind::Other,

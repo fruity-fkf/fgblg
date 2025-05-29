@@ -1,0 +1,3 @@
+theme = "gruvbox"
+template = "template-1"
+code_theme = "github"

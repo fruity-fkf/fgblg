@@ -1,5 +1,5 @@
 [package]
-name = "faggot"
+name = "fgblg"
 version = "0.1.0"
 edition = "2024"
 
@@ -11,4 +11,5 @@ tower-http = { version = "0.5", features = ["fs"] }
 comrak = "0.11"
 orgize = "0.9.0"
 clap = { version = "4", features = ["derive"] }
+serde = "1.0.219"
  
