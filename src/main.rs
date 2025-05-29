@@ -3,6 +3,7 @@ use std::{fs, io, path::Path, process};
 mod files;
 mod html;
 mod markdown;
+mod toml;
 //TODO: fix org mode later
 // mod org;
 mod server;
@@ -15,21 +16,15 @@ mod server;
     about = "FKF's blogging tool. :3", // --help and --about section
     version = "1.0.2",               // --version info
 )]
-struct Args {
-    #[arg(short, long)]
-    theme: String,
-    #[arg(long)]
-    template: String,
-    #[arg(long, value_name = "THEME", help = "Highlight.js theme name (e.g., github-dark, rose-pine)")]
-    code_theme: String,
-}
+struct Args {}
 
 #[tokio::main]
 async fn main() -> io::Result<()> {
-    let args = Args::parse();
-    let css_file = format!("templates/style-{}.css", args.theme);
-    let html_file = format!("templates/{}.html", args.template);
-    println!("{}", css_file);
+    let config: Config = read_config("config.toml").expect("Failed to read config.toml");
+
+    // Construct file paths from config
+    let css_file = format!("templates/style-{}.css", config.theme);
+    let html_file = format!("templates/{}.html", config.template);
 
     // making the folder/file tree and copying shit there
     files::make_folders()?;
