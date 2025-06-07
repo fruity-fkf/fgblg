@@ -20,7 +20,7 @@ Also as one wise girl said, "No there is no slur in the name you are mistaken. H
 - [X] different themes and colorschemes
 - [X] different template support
 - [X] Config.toml for configuring the site
-- [ ] embedded webserver for testing purposes
+- [X] embedded webserver for testing purposes
 - [ ] Proper documenation
 - [ ] Custom Markdown parser library
 - [ ] A proper TUI interface 
